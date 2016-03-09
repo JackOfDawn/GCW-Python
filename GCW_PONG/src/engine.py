@@ -30,7 +30,7 @@ class Engine:
     def on_init(self):
         pygame.init()
         pygame.display.set_caption('Pyng')
-        self._display_surf = pygame.display.set_mode(self.size)# pygame.HWSURFACE | pygame.DOUBLEBUF)
+        self._display_surf = pygame.display.set_mode(self.size)
         pygame.draw.rect(self._display_surf, (255, 0, 0), (0, 0, 320, 240))
         pygame.mouse.set_visible(False)
 

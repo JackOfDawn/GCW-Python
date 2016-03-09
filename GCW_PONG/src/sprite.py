@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 __author__ = 'Joshua'
 import pygame
-
+import os
 
 class Sprite:
     def __init__(self, x, y, image_path, layer=0):
@@ -10,7 +10,7 @@ class Sprite:
         self.rot = 0
         self.image_path = image_path
         self.layer = layer
-        self.image = pygame.image.load("../assets/" + image_path)
+        self.image = pygame.image.load(os.path.dirname(__file__) + "/../assets/" + image_path)
         self.rect = self.image.get_rect()
         self.width = self.rect.size[0]
         self.height = self.rect.size[1]
