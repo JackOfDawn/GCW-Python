@@ -2,7 +2,7 @@
 Name=GCW_PONG
 Type=Application
 Exec=src/main.py
-Icon=assets/ball
+Icon=assets/Icon
 Comment=2 Player Pong -Python
 Terminal=false
 Categories=Custom;
