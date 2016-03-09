@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-
+__author__ = 'Jack'
 import pygame
 from sprite import Sprite
 

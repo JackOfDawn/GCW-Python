@@ -5,6 +5,7 @@ import pygame
 from engine import Engine
 from text import Text
 from ball import Ball
+from Paddle import Paddle
 
 
 class Pong(Engine):
@@ -14,6 +15,7 @@ class Pong(Engine):
         self.scoreP1_text = None
         self.scoreP2_text = None
         self.ball = None
+        self.playerOne = None
         self.fps_update = 0
         self.fps_count = 0
 
@@ -23,6 +25,10 @@ class Pong(Engine):
         self.add(self.fps_text)
         self.ball = Ball(self.width/2, self.height/2, "ball.png")
         self.add(self.ball)
+        self.playerOne = Paddle(20, self.height/2, "paddle.png")
+        self.add(self.playerOne)
+        self.playerTwo = Paddle(320 - 20, self.height/2, "paddle.png")
+        self.add(self.playerTwo)
 
     def update(self, delta_time):
         self.fps_update += 1
@@ -32,8 +38,31 @@ class Pong(Engine):
             self.fps_text.set_text(str(int(1.0/(float(self.fps_count)/1000))))
             self.fps_count = 0
             self.fps_update = 0
-        if pygame.key.get_pressed()[pygame.K_LALT] != 0:
+        self.handleInput();
+
+    def handleInput(self):
+        #quitting
+        if pygame.key.get_pressed()[pygame.K_ESCAPE] != 0:
             sys.exit()
+        #playerone
+        if pygame.key.get_pressed()[pygame.K_UP] != 0:
+            self.playerOne.setVelocity([0, -.2])
+        elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
+            self.playerOne.setVelocity([0, .2])
+        else:
+            self.playerOne.setVelocity([0, 0])
+
+        #playertwo
+        if pygame.key.get_pressed()[pygame.K_SPACE] != 0:
+            self.playerTwo.setVelocity([0, -.2])
+        elif pygame.key.get_pressed()[pygame.K_LALT] != 0:
+            self.playerTwo.setVelocity([0, .2])
+        else:
+            self.playerTwo.setVelocity([0, 0])
+        #resetgame
+        #startball
+
+
 
 
 Pong().execute()
