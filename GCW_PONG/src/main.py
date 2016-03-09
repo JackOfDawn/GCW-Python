@@ -13,7 +13,9 @@ class Pong(Engine):
         Engine.__init__(self, 320, 240, (00, 150, 150))
         self.fps_text = None
         self.scoreP1_text = None
+        self.scoreP1 = 0
         self.scoreP2_text = None
+        self.scoreP2 = 0
         self.ball = None
         self.playerOne = None
         self.fps_update = 0
@@ -21,6 +23,12 @@ class Pong(Engine):
 
     def on_init(self):
         Engine.on_init(self)
+
+        self.scoreP1_text = Text(self.width/4, 30, str(self.scoreP1), 50)
+        self.scoreP2_text = Text(self.width - self.width/4, 30, str(self.scoreP2), 50)
+        self.add(self.scoreP1_text)
+        self.add(self.scoreP2_text)
+
         self.fps_text = Text(280, 220, "30")
         self.add(self.fps_text)
         self.ball = Ball(self.width/2, self.height/2, "ball.png")
@@ -38,7 +46,25 @@ class Pong(Engine):
             self.fps_text.set_text(str(int(1.0/(float(self.fps_count)/1000))))
             self.fps_count = 0
             self.fps_update = 0
-        self.handleInput();
+        self.handleInput()
+        self.checkCollision()
+
+    def checkCollision(self):
+        self.ball.checkCollision(self.playerOne.getRect())
+        self.ball.checkCollision(self.playerTwo.getRect())
+        #p2 scores
+        if(self.ball.getX() < 0):
+            self.ball.setPosition([self.width/2, self.height/2])
+            self.ball.negateXVel()
+            self.scoreP2 += 1
+            self.scoreP2_text.set_text(str(self.scoreP2))
+
+        #p1 scores
+        if(self.ball.getX() > self.width):
+            self.ball.setPosition([self.width/2, self.height/2])
+            self.ball.negateXVel()
+            self.scoreP1 += 1
+            self.scoreP1_text.set_text(str(self.scoreP1))
 
     def handleInput(self):
         #quitting

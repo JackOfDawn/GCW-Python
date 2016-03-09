@@ -12,10 +12,14 @@ class Ball(Sprite):
     def update(self, delta_time):
         self.x += self.vel[0] * delta_time
         self.y += self.vel[1] * delta_time
-
-        if self.rect.top + self.y - self.halfHeight< 0 or self.rect.bottom + self.y - self.halfWidth > 240:
+        if self.rect.top + self.y - self.halfHeight < 0 or self.rect.bottom + self.y - self.halfWidth > 240:
             self.vel[1] = -self.vel[1]
-        if self.rect.left - self.halfWidth + self.x < 0 or self.rect.right - self.halfWidth + self.x > 320:
-            self.vel[0] = -self.vel[0]
-        return
+
+    def checkCollision(self, otherRect):
+        rect = pygame.Rect(self.x - self.halfWidth, self.y - self.halfHeight, self.width, self.height)
+        if rect.colliderect(otherRect):
+            self.negateXVel()
+
+    def negateXVel(self):
+        self.vel[0] = -self.vel[0]
 

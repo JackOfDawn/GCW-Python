@@ -3,6 +3,7 @@ __author__ = 'Joshua'
 import pygame
 import os
 
+
 class Sprite:
     def __init__(self, x, y, image_path, layer=0):
         self.x = x
@@ -28,3 +29,18 @@ class Sprite:
         self.image = pygame.transform.rotate(self.image, self.rot)
         display_surf.blit(self.image, (self.x - self.width/2, self.y - self.height/2))
 
+    def getRect(self):
+        return pygame.Rect(self.x - self.halfWidth, self.y - self.halfHeight, self.width, self.height)
+
+    def getX(self):
+        return self.x
+
+    def getY(self):
+        return self.y
+
+    def getPosition(self):
+        return [self.x, self.y]
+
+    def setPosition(self, newPos):
+        self.x = newPos[0]
+        self.y = newPos[1]
