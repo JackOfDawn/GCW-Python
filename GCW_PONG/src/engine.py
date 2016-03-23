@@ -25,9 +25,10 @@ class Engine:
         self.clock = pygame.time.Clock()
         self.frame_rate = 60
         self._cur_ticks = 0
-
+        self.delta_time = 0
 
     def on_init(self):
+        pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=256)
         pygame.init()
         pygame.display.set_caption('Pyng')
         self._display_surf = pygame.display.set_mode(self.size)
@@ -51,8 +52,9 @@ class Engine:
             for event in pygame.event.get():
                 self.handle_event(event)
             for spr in self.sprites:
-                spr.update(self.delta_time)
-                spr.render(self._display_surf)
+                if spr.get_active() == True:
+                    spr.update(self.delta_time)
+                    spr.render(self._display_surf)
             pygame.display.update()
 
         pygame.quit()

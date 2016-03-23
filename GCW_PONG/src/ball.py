@@ -18,7 +18,8 @@ class Ball(Sprite):
     def checkCollision(self, otherRect):
         rect = pygame.Rect(self.x - self.halfWidth, self.y - self.halfHeight, self.width, self.height)
         if rect.colliderect(otherRect):
-            self.negateXVel()
+            return True
+        return False
 
     def negateXVel(self):
         self.vel[0] = -self.vel[0]

@@ -9,6 +9,7 @@ class Sprite:
         self.x = x
         self.y = y
         self.rot = 0
+        self.active = True
         self.image_path = image_path
         self.layer = layer
         self.image = pygame.image.load(os.path.dirname(__file__) + "/../assets/" + image_path)
@@ -44,3 +45,9 @@ class Sprite:
     def setPosition(self, newPos):
         self.x = newPos[0]
         self.y = newPos[1]
+
+    def set_active(self, active):
+        self.active = active
+
+    def get_active(self):
+        return  self.active

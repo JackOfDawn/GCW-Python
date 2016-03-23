@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=GCW_PONG
+Name=PYNG
 Type=Application
 Exec=src/main.py
 Icon=assets/Icon
-Comment=2 Player Pong -Python
+Comment=2 Player Pong - Python
 Terminal=false
 Categories=Custom;
